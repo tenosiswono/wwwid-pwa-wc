@@ -1,0 +1,47 @@
+{
+  "functions": {
+    "predeploy": [
+      "npm --prefix functions run lint"
+    ]
+  },
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source" : "**/*.@(jpg|jpeg|gif|png|ico)",
+        "headers" : [ {
+          "key" : "Cache-Control",
+          "value" : "max-age=7200"
+        }]
+      },
+      {
+        "source" : "sw.js",
+        "headers" : [
+          {
+            "key" : "Cache-Control",
+            "value" : "max-age=0, no-cache, no-store, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "/",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "<https://us-central1-idpwa-wc.cloudfunctions.net>;rel=dns-prefetch,<https://cdn-images-1.medium.com>;rel=dns-prefetch,</build.js>;rel=preload;as=script,</vendor.js>;rel=preload;as=script,<https://us-central1-idpwa-wc.cloudfunctions.net/api?&type=list>;rel=preload;as=fetch;crossorigin"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks['vendor'].entry %>" as="script">
+    <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks['application'].entry %>" as="script">
+    <link rel="preload" href="/webcomponents-loader.js" as="script">
+    <meta charset="UTF-8">
+    <base href="/">
+    <link rel="canonical" href="https://idpwa-wc.firebaseapp.com/">
+    <link rel="shortcut icon" href="/assets/favicon-32x32.png" type="image/x-icon">
+    <link rel="icon" href="/assets/favicon-32x32.png" type="image/x-icon">
+    <link rel="manifest" href="assets/manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="theme-color" content="#5762D5">
+    <meta name="description" content="Webcomponents Hacker News PWA">
+    <title>WWWID PWA</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Roboto', 'Noto', sans-serif;
+        line-height: 1.5;
+      }
+      nav {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 100;
+        height: 48px;
+        background-color: #5762D5;
+      }
+      noscript {
+        height: calc(50vh - 48px);
+        margin: 48px 0 0 0;
+        background: #eee;
+        text-align: center;
+        padding-top: 50vh;
+        display: block;
+      }
+    </style>
+    <script>
+      if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+              navigator.serviceWorker.register('/sw.js', {scope: '/'})
+                  .then(function () {
+                      console.log('Service Worker Registered');
+                  });
+              navigator.serviceWorker.ready.then(function () {
+                  console.log('Service Worker Ready');
+              });
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <idpwa-wc>
+      <nav />
+      <noscript>
+        Sorry, JavaScript needs to be enabled in order to run this application.
+      </noscript>
+    </idpwa-wc>
+    <script src="<%= htmlWebpackPlugin.files.chunks['vendor'].entry %>"></script>
+    <script src="<%= htmlWebpackPlugin.files.chunks['application'].entry %>"></script>
+    <script src="/webcomponents-loader.js"></script>
+  </body>
+</html>
