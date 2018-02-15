@@ -59,6 +59,10 @@ template.innerHTML = `
     border-radius: 3px;
     display: inline-block;
   }
+  #content img {
+    width: 100%;
+    height: auto;
+  }
 </style>
 <div id="thumbnail"></div>
 <article>

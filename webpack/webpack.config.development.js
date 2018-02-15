@@ -20,8 +20,7 @@ module.exports = merge(config, {
       "@webcomponents/webcomponentsjs/custom-elements-es5-adapter",
       "@0xcda7a/redux-es6",
       "redux-thunk",
-      "unfetch",
-      "intersection-observer"
+      "unfetch"
     ]
   },
   plugins: [

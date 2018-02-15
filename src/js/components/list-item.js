@@ -70,16 +70,18 @@ class ListItem extends HTMLElement {
     this._author = this.shadowRoot.getElementById('author');
     this._pubDate = this.shadowRoot.getElementById('pub-date');
     this._description = this.shadowRoot.getElementById('description');
-    const io = new IntersectionObserver(entries => {
-      let visiblity = false;
-      if (entries[0].intersectionRatio !== 0) {
-        visiblity = true;
-      } else {
-        visiblity = false;
-      }
-      this.viewImage(visiblity);
-    });
-    io.observe(this._thumbnail);
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        let visiblity = false;
+        if (entries[0].intersectionRatio !== 0) {
+          visiblity = true;
+        } else {
+          visiblity = false;
+        }
+        this.viewImage(visiblity);
+      });
+      io.observe(this._thumbnail);
+    }
   }
 
   connectedCallback() {
@@ -92,6 +94,9 @@ class ListItem extends HTMLElement {
     this._author.innerText = props.author;
     this._pubDate.innerText = (new Date(props.pubDate)).toLocaleDateString();
     this._description.innerText = props.description;
+    if (!('IntersectionObserver' in window)) {
+      this._thumbnail.style.backgroundImage = `url('${props.thumbnail}')`;
+    }
   }
 
   viewImage(visiblity) {
