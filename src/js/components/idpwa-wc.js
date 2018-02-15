@@ -1,5 +1,6 @@
 import './list-view'
 import './detail-view'
+import baseUrl from '../lib/baseUrl'
 import { connect } from '../lib/connect-mixin.js';
 import { installRouter } from '../lib/router.js';
 import { store } from '../store.js';
@@ -67,7 +68,7 @@ template.innerHTML = `
 </style>
 <div>
   <nav>
-    <a href="/">
+    <a href="${baseUrl}/">
       <div class="nav-container">
         <div class="logo"></div>
         <div class="title">WWWID PWA</div>

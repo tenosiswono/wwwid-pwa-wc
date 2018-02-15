@@ -1,4 +1,5 @@
 import renderList from '../lib/renderList'
+import baseUrl from '../lib/baseUrl'
 
 let template = document.createElement('template');
 template.innerHTML = `
@@ -90,7 +91,7 @@ class ListItem extends HTMLElement {
 
   render(props) {
     this._title.innerText = props.title;
-    this._url.href = `/detail/${props.slug}`;
+    this._url.href = `${baseUrl}/detail/${props.slug}`;
     this._author.innerText = props.author;
     this._pubDate.innerText = (new Date(props.pubDate)).toLocaleDateString();
     this._description.innerText = props.description;

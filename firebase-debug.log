@@ -1,0 +1,56 @@
+[debug] [2018-02-15T07:03:24.239Z] ----------------------------------------------------------------------
+[debug] [2018-02-15T07:03:24.243Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\bin\firebase deploy
+[debug] [2018-02-15T07:03:24.244Z] CLI Version:   3.17.4
+[debug] [2018-02-15T07:03:24.244Z] Platform:      win32
+[debug] [2018-02-15T07:03:24.244Z] Node Version:  v8.6.0
+[debug] [2018-02-15T07:03:24.244Z] Time:          Thu Feb 15 2018 14:03:24 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-02-15T07:03:24.245Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-15T07:03:24.263Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-15T07:03:24.264Z] > authorizing via signed-in user
+[debug] [2018-02-15T07:03:24.267Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/idpwa-wc  
+  
+ Thu Feb 15 2018 14:03:24 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-02-15T07:03:25.606Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-15T07:03:25.606Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/idpwa-wc/tokens  
+  
+ Thu Feb 15 2018 14:03:25 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-02-15T07:03:26.715Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'idpwa-wc'...
+[info] 
+[info] i  deploying functions, hosting
+[info] Running command: npm --prefix functions run lint
+[info] +  functions: Finished running predeploy script.
+[debug] [2018-02-15T07:03:32.288Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase experimental:functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "cors": "^2.8.4",
+    "firebase-admin": "~5.8.1",
+    "firebase-functions": "^0.8.1",
+    "lru-cache": "^4.1.1",
+    "slug": "^0.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-02-15T07:03:32.289Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/idpwa-wc?view=CONSUMER_VIEW  
+  
+ Thu Feb 15 2018 14:03:32 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-02-15T07:03:32.290Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/idpwa-wc?view=CONSUMER_VIEW  
+  
+ Thu Feb 15 2018 14:03:32 GMT+0700 (SE Asia Standard Time)

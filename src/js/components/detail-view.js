@@ -2,6 +2,7 @@ import renderList from '../lib/renderList'
 import toTitleCase from '../lib/toTitleCase'
 import { connect } from '../lib/connect-mixin.js';
 import { store } from '../store.js';
+import baseUrl from '../lib/baseUrl'
 
 let template = document.createElement('template');
 template.innerHTML = `
@@ -66,10 +67,8 @@ template.innerHTML = `
 </style>
 <div id="thumbnail"></div>
 <article>
-  <a id="url">
-    <h3 id="title">
-    </h3>
-  </a>
+  <h3 id="title">
+  </h3>
   <div class="meta">
     <div id="author"></div>
     <div id="pub-date"></div>
@@ -91,7 +90,6 @@ class DetailView extends connect(store)(HTMLElement) {
 
     this._title = this.shadowRoot.getElementById('title');
     this._thumbnail = this.shadowRoot.getElementById('thumbnail');
-    this._url = this.shadowRoot.getElementById('url');
     this._author = this.shadowRoot.getElementById('author');
     this._pubDate = this.shadowRoot.getElementById('pub-date');
     this._content = this.shadowRoot.getElementById('content');
@@ -113,7 +111,6 @@ class DetailView extends connect(store)(HTMLElement) {
   updateDatas = (props) => {
     this._title.innerText = props.title;
     this._thumbnail.style.backgroundImage = `url('${props.thumbnail}')`;
-    this._url.href = `/detail/${props.slug}`;
     this._author.innerText = props.author;
     this._pubDate.innerText = (new Date(props.pubDate)).toLocaleDateString();
     this._content.innerHTML = props.content;
@@ -122,7 +119,7 @@ class DetailView extends connect(store)(HTMLElement) {
 
   generateContent = (value) => {
     return `
-      <li><a href="/cat/${value}" >${toTitleCase(value)}</a></li>
+      <li><a href="${baseUrl}/cat/${value}" >${toTitleCase(value)}</a></li>
     `
   }
 }

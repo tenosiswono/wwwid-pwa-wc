@@ -38,7 +38,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "<https://us-central1-idpwa-wc.cloudfunctions.net>;rel=dns-prefetch,<https://cdn-images-1.medium.com>;rel=dns-prefetch,</build.js>;rel=preload;as=script,</vendor.js>;rel=preload;as=script,<https://us-central1-idpwa-wc.cloudfunctions.net/api?&type=list>;rel=preload;as=fetch;crossorigin"
+            "value": "<https://us-central1-idpwa-wc.cloudfunctions.net>;rel=dns-prefetch,<https://cdn-images-1.medium.com>;rel=dns-prefetch,</build.js>;rel=preload;as=script,</vendor.js>;rel=preload;as=script"
           }
         ]
       }

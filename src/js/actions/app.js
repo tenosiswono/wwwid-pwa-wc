@@ -1,11 +1,11 @@
 import 'unfetch/polyfill';
 import urls from '../lib/urls';
 
-export const NAVIGATE = 'NAVIGATE';
-export const DATA_LOADING = 'DATA_LOADING';
-export const DATA_LOADED = 'DATA_LOADED';
-export const DATA_ERROR = 'DATA_ERROR';
-export const SET_DATA = 'SET_DATA';
+export const NAVIGATE = 'N';
+export const DATA_LOADING = 'DL';
+export const DATA_LOADED = 'DLD';
+export const DATA_ERROR = 'DE';
+export const SET_DATA = 'SD';
 
 export const navigate = (path) => {
   return {
