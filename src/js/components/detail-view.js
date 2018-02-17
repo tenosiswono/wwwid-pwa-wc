@@ -1,8 +1,5 @@
 import renderList from '../lib/renderList'
 import toTitleCase from '../lib/toTitleCase'
-import { connect } from '../lib/connect-mixin.js';
-import { store } from '../store.js';
-import baseUrl from '../lib/baseUrl'
 
 let template = document.createElement('template');
 template.innerHTML = `
@@ -79,15 +76,13 @@ template.innerHTML = `
 </article>
 `
 
-class DetailView extends connect(store)(HTMLElement) {
+class DetailView extends HTMLElement {
   constructor() {
     super();
-    let shadowRoot = this.attachShadow({mode: 'open'});
+    let shadowRoot = this.attachShadow({
+      mode: 'open'
+    });
     this.shadowRoot.appendChild(document.importNode(template.content, true));
-
-    this._state = store.getState();
-    this._ready = true;
-
     this._title = this.shadowRoot.getElementById('title');
     this._thumbnail = this.shadowRoot.getElementById('thumbnail');
     this._author = this.shadowRoot.getElementById('author');
@@ -96,19 +91,18 @@ class DetailView extends connect(store)(HTMLElement) {
     this._categories = this.shadowRoot.getElementById('categories');
   }
 
-  update(state) {
-    if (!this._ready) {
-      return;
-    }
-    if (state.app.url.indexOf('/detail') > -1) {
-      if (state.data.currentData !== this._state.data.currentData){
-        this.updateDatas(state.data.currentData.data);
-      }
-    }
-    this._state = state
+  get detail() {
+    return this._detail
+  }
+  set detail(detail) {
+    this._detail = detail
   }
 
-  updateDatas = (props) => {
+  connectedCallback() {
+    this.render(this._detail);
+  }
+
+  render = (props) => {
     this._title.innerText = props.title;
     this._thumbnail.style.backgroundImage = `url('${props.thumbnail}')`;
     this._author.innerText = props.author;
@@ -119,7 +113,7 @@ class DetailView extends connect(store)(HTMLElement) {
 
   generateContent = (value) => {
     return `
-      <li><a href="${baseUrl}/cat/${value}" >${toTitleCase(value)}</a></li>
+      <li><a href="/cat/${value}" >${toTitleCase(value)}</a></li>
     `
   }
 }

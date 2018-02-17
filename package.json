@@ -13,10 +13,8 @@
   "author": "teno siswono",
   "license": "ISC",
   "dependencies": {
-    "@0xcda7a/redux-es6": "^3.7.2",
     "@webcomponents/webcomponentsjs": "^1.0.22",
     "express": "^4.16.2",
-    "redux-thunk": "^2.2.0",
     "unfetch": "^3.0.0"
   },
   "devDependencies": {

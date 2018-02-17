@@ -1,11 +1,9 @@
-import './list-view'
+import './list-item'
 import './detail-view'
-import baseUrl from '../lib/baseUrl'
-import { connect } from '../lib/connect-mixin.js';
-import { installRouter } from '../lib/router.js';
-import { store } from '../store.js';
-import { navigate, loadApi, setData } from '../actions/app.js';
-import renderList from '../lib/renderList'
+import urls from '../lib/urls'
+import {
+  installRouter
+} from '../lib/router.js';
 
 let template = document.createElement('template');
 template.innerHTML = `
@@ -45,7 +43,7 @@ template.innerHTML = `
   .title {
     color: white;
   }
-  #overlay {
+  .loading {
     height: calc(100vh - 48px);
     width: 100%;
     position: fixed;
@@ -55,20 +53,13 @@ template.innerHTML = `
     text-align: center;
     color: #999;
     padding-top: 50vh;
-    display: none;
-  }
-  .loading {
-    display: block!important;
-  }
-  .error {
-    display: block!important;
-    background: #f58080!important;
-    color: #000!important;
+    margin: 0;
+    max-width: none;
   }
 </style>
 <div>
   <nav>
-    <a href="${baseUrl}/">
+    <a href="/">
       <div class="nav-container">
         <div class="logo"></div>
         <div class="title">WWWID PWA</div>
@@ -77,66 +68,61 @@ template.innerHTML = `
   </nav>
   <section id="section">
   </section>
-  <div id="overlay"></div>
 </div>
 `
 
-class idpwaWc extends connect(store)(HTMLElement) {
+class idpwaWc extends HTMLElement {
   constructor() {
     super();
-    let shadowRoot = this.attachShadow({mode: 'open'});
+    let shadowRoot = this.attachShadow({
+      mode: 'open'
+    });
     this.shadowRoot.appendChild(document.importNode(template.content, true));
-    this._state = store.getState();
-    this._ready = true;
     this._section = shadowRoot.getElementById('section');
     this._overlay = shadowRoot.getElementById('overlay');
+    this._loading = false
 
     installRouter(() => {
-      store.dispatch(navigate(window.location));
+      this.getData(window.location);
     })
   }
 
-  update(state) {
-    if (!this._ready) {
-      return;
+  getData(path) {
+    if (this.loading) return
+    this.loading = true
+    this._section.innerHTML = 'Loading...'
+    this._section.classList.add('loading')
+    this._currentPath = path
+    const val = path.pathname.substr(1).split('/')[1]
+    if (path.pathname.indexOf('/detail') > -1) {
+      this.loadData('/detail', val)
+    } else {
+      this.loadData('/', val)
     }
-    if (state.app.url !== this._state.app.url
-      || ( state.app.url === this._state.app.url && state.app.val !== this._state.app.val)) {
-      this._state = state
-      let url = state.app.url;
-      const data = state.data.datas.filter((i) => i.url === state.app.url && i.val === state.app.val && i.expiry > Date.now());
-      if (state.app.url.indexOf('/detail') > -1 && this._section.getElementsByTagName('list-view'.length === 0)) {
-        url = '/detail'
-        this._section.innerHTML = '';
-        this._section.appendChild(document.createElement("detail-view"))
-      } else if (this._section.getElementsByTagName('list-view'.length === 0)) {
-        url = '/'
-        this._section.innerHTML = '';
-        this._section.appendChild(document.createElement("list-view"))
-      }
-      if (state.data.loading !== this._state.data.loading){
-        this.updateLoading(state.data.loading, state.data.errMsg);
-      }
-      if (data.length === 0) {
-        store.dispatch(loadApi(url, state.app.val))
-      } else {
-        store.dispatch(setData(data[0]))
-      }
-    }
-    this._section
   }
 
-  updateLoading = (loading, errMsg) => {
-    if (loading) {
-      this._overlay.classList.add("loading");
-      this._overlay.innerText = 'Loading...';
-    } else if (errMsg.length) {
-      this._overlay.classList.add("error");
-      this._overlay.innerText = errMsg;
+  loadData(url, val) {
+    fetch(urls[url](val)).then(resp => {
+      resp.json().then(results => {
+        this.createElements(results, url)
+        this.loading = false
+      })
+    })
+  }
+
+  createElements(results, url) {
+    this._section.innerHTML = ''
+    this._section.classList.remove('loading')
+    if (url === '/detail') {
+      const detailView = document.createElement('detail-view')
+      detailView.detail = results
+      this._section.appendChild(detailView)
     } else {
-      this._overlay.classList.remove("error");
-      this._overlay.classList.remove("loading");
-      this._overlay.innerText = '';
+      results.forEach(result => {
+        const listItem = document.createElement('list-item')
+        listItem.dataItem = result
+        this._section.appendChild(listItem)
+      })
     }
   }
 }

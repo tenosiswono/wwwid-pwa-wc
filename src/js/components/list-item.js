@@ -1,5 +1,4 @@
 import renderList from '../lib/renderList'
-import baseUrl from '../lib/baseUrl'
 
 let template = document.createElement('template');
 template.innerHTML = `
@@ -85,13 +84,20 @@ class ListItem extends HTMLElement {
     }
   }
 
+  get dataItem() {
+    return this._dataItem
+  }
+  set dataItem(dataItem) {
+    this._dataItem = dataItem
+  }
+
   connectedCallback() {
-    this.render(this.dataset)
+    this.render(this._dataItem)
   }
 
   render(props) {
     this._title.innerText = props.title;
-    this._url.href = `${baseUrl}/detail/${props.slug}`;
+    this._url.href = `/detail/${props.slug}`;
     this._author.innerText = props.author;
     this._pubDate.innerText = (new Date(props.pubDate)).toLocaleDateString();
     this._description.innerText = props.description;
@@ -102,7 +108,7 @@ class ListItem extends HTMLElement {
 
   viewImage(visiblity) {
     if (visiblity) {
-      this._thumbnail.style.backgroundImage = `url('${this.dataset.thumbnail}')`;
+      this._thumbnail.style.backgroundImage = `url('${this._dataItem.thumbnail}')`;
     } else {
       this._thumbnail.style.backgroundImage = '';
     }
