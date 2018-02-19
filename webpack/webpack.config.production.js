@@ -3,6 +3,7 @@ const merge = require("webpack-merge");
 const webpack = require("webpack");
 const config = require("./webpack.config.base");
 const UglifyJs = require('uglifyjs-webpack-plugin');
+const OptimizeJsPlugin = require('optimize-js-plugin');
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
@@ -59,6 +60,9 @@ module.exports = merge(config, {
     // Avoid publishing files when compilation fails
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
+    new OptimizeJsPlugin({
+      sourceMap: false,
+    }),
     new UglifyJs()
   ],
   module: {

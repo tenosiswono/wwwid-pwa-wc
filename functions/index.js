@@ -38,7 +38,6 @@ const processData = (req, res, apiData) => {
       return
     }
   } else {
-    console.log(apiData)
     response = JSON.stringify(
       apiData.filter(i => req.query.cat ? i.categories.indexOf(req.query.cat) > -1 : true).map(i => {
         return {
@@ -72,7 +71,6 @@ const renderAndCache = (req, res) => {
   } else {
     axios.get('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2Fwwwid')
     .then((response) => {
-      console.log(response.data)
       const apiData = response.data.items.map(i => {
         return {
           author: i.author,
@@ -85,7 +83,6 @@ const renderAndCache = (req, res) => {
           content: i.content
         }
       })
-      console.log(apiData)
       apiCache.set('api-data', apiData)
       return processData(req, res, apiData)
     })

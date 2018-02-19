@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: [
     new webpack.IgnorePlugin(/vertx/),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     // Shared code
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
@@ -47,7 +48,7 @@ module.exports = {
       //HTML
       {
         test: /\.html$/,
-        include: [path.resolve(__dirname, "../src/client")],
+        include: [path.resolve(__dirname, "../src/js/components")],
         use: [
           {
             loader: "html-loader",
@@ -56,18 +57,6 @@ module.exports = {
             }
           }
         ]
-      },
-      // Images
-      // Inline base64 URLs for <=8k images, direct URLs for the rest
-      {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
-        use: {
-          loader: "url-loader",
-          options: {
-            limit: 8192,
-            name: "images/[name].[ext]?[hash]"
-          }
-        }
       }
     ]
   }
