@@ -4,7 +4,7 @@ module.exports = (context, opts = {}) => ({
       modules: false,
       targets: {
         browsers: ["last 2 versions", "safari >= 7"]
-      }
+      },
       ...opts['preset-env']
     }]
   ],

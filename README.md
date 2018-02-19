@@ -15,7 +15,7 @@ Made with _love_ 💔
     * npm install -g firebase-tools
 3. Install Yarn Dependencies
     * yarn install
-4. Deploy Firebase function (must have billing enable not-free)
+4. Deploy Firebase function
     * firebase deploy
 5. Run Locally
     * yarn start (chrome only)
