@@ -2,6 +2,7 @@
 const path = require("path")
 
 module.exports = {
+  mode: "development",
   entry: {
     main: './src/js/index.js'
   },
@@ -21,6 +22,18 @@ module.exports = {
           cacheDirectory: true,
           presets: [require.resolve("./.babelrc.js")]
         }
+      },
+      {
+        test: /\.html$/,
+        include: [path.resolve(__dirname, "./src/js/components")],
+        use: [
+          {
+            loader: "html-loader",
+            options: {
+              minimize: true
+            }
+          }
+        ]
       }
     ]
   }

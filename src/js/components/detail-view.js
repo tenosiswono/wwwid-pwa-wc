@@ -1,79 +1,9 @@
 import renderList from '../lib/renderList'
 import toTitleCase from '../lib/toTitleCase'
+import templateHtml from './detail-view.html'
 
 let template = document.createElement('template');
-template.innerHTML = `
-<style>
-  :host {
-    margin: 16px 0;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-    border-radius: 2px;
-    display: block;
-  }
-  a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-  article {
-    padding: 16px;
-  }
-  #title {
-    margin: 0 0 4px 0;
-  }
-  #thumbnail {
-    border: 1px solid rgba(0,0,0,.15);
-    background-position: 50% 50%;
-    background-origin: border-box;
-    background-size: cover;
-    background-color: #f0f0f0;
-    height: 172px;
-  }
-  .meta {
-    display: flex;
-    color: #636363;
-    font-size: 13px;
-    margin-bottom: 8px;
-  }
-  #author {
-    flex: 1;
-  }
-  #description {
-    text-align: justify;
-  }
-  #categories {
-    letter-spacing: 0;
-    font-weight: 400;
-    font-style: normal;
-    padding: 0;
-    list-style: none;
-    list-style-image: none;
-  }
-  #categories li {
-    border: none;
-    color: rgba(0,0,0,.68);
-    background: rgba(0,0,0,.05);
-    padding: 5px 10px;
-    border-radius: 3px;
-    display: inline-block;
-  }
-  #content img {
-    width: 100%;
-    height: auto;
-  }
-</style>
-<div id="thumbnail"></div>
-<article>
-  <h3 id="title">
-  </h3>
-  <div class="meta">
-    <div id="author"></div>
-    <div id="pub-date"></div>
-  </div>
-  <div id="content"></div>
-  <ul id="categories">
-  </ul>
-</article>`
+template.innerHTML = templateHtml
 
 class DetailView extends HTMLElement {
   constructor() {

@@ -4,6 +4,7 @@
   "description": "hacker news pwa using web components",
   "main": "index.js",
   "scripts": {
+    "start": "node ./server.js",
     "build": "webpack --mode production && yarn build:client && yarn build:index && yarn build:wc && yarn gen-sw",
     "gen-sw": "node generate-sw.js",
     "build:client": "cpx src/assets/**/* build/assets",
@@ -14,7 +15,6 @@
     "deploy:hosting": "firebase deploy --only hosting",
     "deploy:functions": "firebase deploy --only functions",
     "deploy": "firebase deploy"
-
   },
   "author": "teno siswono",
   "license": "ISC",
@@ -37,6 +37,8 @@
     "webpack": "^4.0.0-beta.2",
     "webpack-bundle-analyzer": "^2.10.1",
     "webpack-cli": "^2.0.6",
+    "webpack-dev-middleware": "^2.0.6",
+    "webpack-hot-middleware": "^2.21.0",
     "workbox-build": "^2.1.2"
   }
 }
