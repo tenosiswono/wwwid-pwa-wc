@@ -42,7 +42,7 @@ class ListItem extends HTMLElement {
     this.render(this._dataItem)
   }
 
-  render(props) {
+  render = (props) => {
     this._title.innerText = props.title;
     this._url.href = `/detail/${props.slug}`;
     this._author.innerText = props.author;
@@ -53,7 +53,7 @@ class ListItem extends HTMLElement {
     }
   }
 
-  viewImage(visiblity) {
+  viewImage = (visiblity) => {
     if (visiblity) {
       this._thumbnail.style.backgroundImage = `url('${this._dataItem.thumbnail}')`;
     } else {

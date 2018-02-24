@@ -4,6 +4,7 @@ import urls from '../lib/urls'
 import {
   installRouter
 } from '../lib/router.js'
+
 import templateHtml from './idpwa-wc.html'
 
 let template = document.createElement('template');
@@ -25,7 +26,7 @@ class idpwaWc extends HTMLElement {
     })
   }
 
-  getData(path) {
+  getData = (path) => {
     if (this.loading) return
     this.loading = true
     this._section.innerHTML = 'Loading...'
@@ -39,7 +40,7 @@ class idpwaWc extends HTMLElement {
     }
   }
 
-  loadData(url, val) {
+  loadData = (url, val) => {
     fetch(urls[url](val)).then(resp => {
       resp.json().then(results => {
         this.createElements(results, url)
@@ -48,7 +49,7 @@ class idpwaWc extends HTMLElement {
     })
   }
 
-  createElements(results, url) {
+  createElements = (results, url) => {
     this._section.innerHTML = ''
     this._section.classList.remove('loading')
     if (url === '/detail') {

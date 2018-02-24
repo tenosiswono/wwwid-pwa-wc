@@ -1,18 +1,12 @@
-// Creates a hot reloading development environment
-
 const path = require("path");
 const express = require("express");
 const webpack = require("webpack");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
-const DashboardPlugin = require("webpack-dashboard/plugin");
-const config = require("./../webpack/webpack.config.development");
+const config = require("./webpack.config.js");
 
 const app = express();
 const compiler = webpack(config);
-
-// Apply CLI dashboard for your webpack dev server
-compiler.apply(new DashboardPlugin());
 
 const host = process.env.HOST || "localhost";
 const port = process.env.PORT || 3000;
@@ -35,10 +29,7 @@ app.use(devMiddleware);
 
 app.use(webpackHotMiddleware(compiler));
 
-app.get("*", (req, res, next) => {
-  req.url = "/index.html";
-  devMiddleware(req, res, next);
-});
+app.get("*", express.static(path.join(__dirname, 'build')));
 
 app.listen(port, host, err => {
   if (err) {
