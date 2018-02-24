@@ -21,7 +21,6 @@
   "license": "ISC",
   "dependencies": {
     "@webcomponents/webcomponentsjs": "^1.0.22",
-    "domino": "^2.0.1",
     "express": "^4.16.2",
     "unfetch": "^3.0.0"
   },
