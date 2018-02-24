@@ -1,6 +1,5 @@
 import './list-item'
 import './detail-view'
-import fetch from 'unfetch'
 import urls from '../lib/urls'
 import {
   installRouter
@@ -27,7 +26,7 @@ class idpwaWc extends HTMLElement {
     })
   }
 
-  getData(path) {
+  getData = (path) => {
     if (this.loading) return
     this.loading = true
     this._section.innerHTML = 'Loading...'
@@ -41,7 +40,7 @@ class idpwaWc extends HTMLElement {
     }
   }
 
-  loadData(url, val) {
+  loadData = (url, val) => {
     fetch(urls[url](val)).then(resp => {
       resp.json().then(results => {
         this.createElements(results, url)
@@ -50,7 +49,7 @@ class idpwaWc extends HTMLElement {
     })
   }
 
-  createElements(results, url) {
+  createElements = (results, url) => {
     this._section.innerHTML = ''
     this._section.classList.remove('loading')
     if (url === '/detail') {

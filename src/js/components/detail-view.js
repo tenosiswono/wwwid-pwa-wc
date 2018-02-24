@@ -31,7 +31,7 @@ class DetailView extends HTMLElement {
     this.render(this._detail);
   }
 
-  render(props) {
+  render = (props) => {
     this._title.innerText = props.title;
     this._thumbnail.style.backgroundImage = `url('${props.thumbnail}')`;
     this._author.innerText = props.author;
@@ -40,7 +40,7 @@ class DetailView extends HTMLElement {
     this._categories.innerHTML = renderList(props.categories, this.generateContent)
   }
 
-  generateContent(value) {
+  generateContent  = (value) => {
     return `<li><a href="/cat/${value}" >${toTitleCase(value)}</a></li>`
   }
 }
