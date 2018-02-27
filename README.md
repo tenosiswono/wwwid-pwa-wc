@@ -38,16 +38,16 @@ Tested with [www.webpagetest.org](https://www.webpagetest.org/easy.php) with `Mo
 
 From: Dulles, VA - Moto G4 - Chrome - 3GSlow
 
-2/25/2018, 2:26:33 AM GMT+7
+Feb 28, 2018, 1:14 AM GMT+7
 
-Score Link: [score](https://www.webpagetest.org/result/180224_GY_04331286bd7e24239eb54e6e0b1e31de/)
+Score Link: [score](https://www.webpagetest.org/result/180227_K1_aa017b5f3ce67dd51ec9da1a3681b8d5/)
 
-Lighthouse Link: [lighthouse](https://www.webpagetest.org/lighthouse.php?test=180224_GY_04331286bd7e24239eb54e6e0b1e31de&run=1)
+Lighthouse Link: [lighthouse](https://www.webpagetest.org/lighthouse.php?test=180227_K1_aa017b5f3ce67dd51ec9da1a3681b8d5&run=2)
 
-Lighthouse First meaningful paint: 1,940 ms
+Lighthouse First meaningful paint: 2,170 ms
 
 
-Lighthouse First Interactive (beta): 3,430 ms
+Lighthouse First Interactive (beta): 2,170 ms
 
 
 Lighthouse PWA Score: 91/100 (webpagetest pwa score seems to be broken the https redirect [#2363](https://github.com/GoogleChrome/lighthouse/issues/2363))
