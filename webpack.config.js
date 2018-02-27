@@ -1,5 +1,7 @@
 
 const path = require("path")
+const webpack = require("webpack")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = {
   mode: "development",
@@ -11,6 +13,23 @@ module.exports = {
     path: path.resolve(__dirname, "./build"),
     publicPath: "/"
   },
+  plugins: [
+    new webpack.IgnorePlugin(/vertx/),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: "src/index.html",
+      inject: false,
+      minify: {
+        minifyCSS: true,
+        removeComments: true,
+        collapseInlineTagWhitespace: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true,
+        minifyJS: true
+      }
+    })
+  ],
   module: {
     rules: [
       {

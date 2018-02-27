@@ -41,7 +41,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "<https://cdn-images-1.medium.com>;rel=dns-prefetch,</build.js>;rel=preload;as=script,</webcomponents-loader.js>;rel=preload;as=script"
+            "value": "<https://cdn-images-1.medium.com>;rel=dns-prefetch,</build.js>;rel=preload;as=script,</webcomponents-loader.js>;rel=preload;as=script,</api?&type=list>;rel=preload"
           }
         ]
       }

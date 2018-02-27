@@ -4,13 +4,12 @@
   "description": "hacker news pwa using web components",
   "main": "index.js",
   "scripts": {
-    "start": " yarn build:clean && yarn build:client && yarn build:index && yarn build:wc && yarn gen-sw && node ./server.js",
-    "build": "yarn build:clean && webpack --mode production && yarn build:client && yarn build:index && yarn build:wc && yarn gen-sw",
+    "start": " yarn build:clean && yarn build:client && yarn build:wc && yarn gen-sw && node ./server.js",
+    "build": "yarn build:clean && webpack --mode production && yarn build:client && yarn build:wc && yarn gen-sw",
     "gen-sw": "node generate-sw.js",
     "build:clean": "del-cli build --force --dry-run",
     "build:client": "cpx src/assets/**/* build/assets",
     "build:wc": "cpx node_modules/@webcomponents/webcomponentsjs/webcomponents-*.js build/",
-    "build:index": "cpx src/index.html build",
     "analyze": "webpack --mode production --profile --json > webpack-profile.json && webpack-bundle-analyzer webpack-profile.json",
     "lint": "standard src --ignore-path .gitignore --fix",
     "deploy:hosting": "firebase deploy --only hosting",
@@ -21,8 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "@webcomponents/webcomponentsjs": "^1.0.22",
-    "express": "^4.16.2",
-    "unfetch": "^3.0.0"
+    "express": "^4.16.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -35,6 +33,7 @@
     "cross-env": "^5.1.3",
     "del-cli": "^1.1.0",
     "html-loader": "^0.5.5",
+    "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
     "standard": "^10.0.3",
     "webpack": "^4.0.0-beta.2",
     "webpack-bundle-analyzer": "^2.10.1",
