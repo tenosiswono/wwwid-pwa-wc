@@ -1,4 +1,8 @@
-window.fetch = (url => {
+import unfetch from 'unfetch'
+window.fetch = ((url, isNav) => {
+  if (isNav) {
+    return unfetch(url)
+  }
   return new Promise((resolve, reject) => {
     var request = new XMLHttpRequest();
     request.onerror = reject;

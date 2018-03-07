@@ -2,6 +2,7 @@ const functions = require('firebase-functions')
 const axios = require('axios')
 const LRUCache = require('lru-cache')
 const slug = require('slug')
+const cors = require('cors')({origin: true})
 
 const apiCache = new LRUCache({
   max: 100,
@@ -12,7 +13,9 @@ const getCacheKey = (req) => {
 }
 exports.api = functions.https.onRequest((req, res) => {
   res.setHeader('Content-Type', 'application/json');
-  renderAndCache(req, res)
+  cors(req, res, () => {
+    renderAndCache(req, res)
+  })
 })
 
 const processData = (req, res, apiData) => {
@@ -43,6 +46,7 @@ const processData = (req, res, apiData) => {
           title: i.title,
           slug: i.slug,
           thumbnail: i.thumbnail,
+          categories: i.categories,
           description: i.description
         }
       })

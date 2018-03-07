@@ -18,10 +18,10 @@ export const installRouter = (locationUpdatedCallback) => {
     e.preventDefault();
     if (href !== location.href) {
       window.history.pushState({}, '', href);
-      locationUpdatedCallback();
+      locationUpdatedCallback(true);
     }
   });
   console.log(process.env.NODE_ENV)
-  window.addEventListener('popstate', () => locationUpdatedCallback());
-  locationUpdatedCallback();
+  window.addEventListener('popstate', () => locationUpdatedCallback(false));
+  locationUpdatedCallback(false);
 };

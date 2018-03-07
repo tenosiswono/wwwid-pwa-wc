@@ -2,6 +2,7 @@
 const path = require("path")
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   mode: "development",
@@ -14,6 +15,7 @@ module.exports = {
     publicPath: "/"
   },
   plugins: [
+    new CleanWebpackPlugin(['build']),
     new webpack.IgnorePlugin(/vertx/),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({

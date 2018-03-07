@@ -21,12 +21,12 @@ class idpwaWc extends HTMLElement {
     this._overlay = shadowRoot.getElementById('overlay');
     this._loading = false
 
-    installRouter(() => {
-      this.getData(window.location);
+    installRouter((isNav) => {
+      this.getData(window.location, isNav);
     })
   }
 
-  getData = (path) => {
+  getData = (path, isNav) => {
     if (this.loading) return
     this.loading = true
     this._section.innerHTML = 'Loading...'
@@ -34,35 +34,50 @@ class idpwaWc extends HTMLElement {
     this._currentPath = path
     const val = path.pathname.substr(1).split('/')[1]
     if (path.pathname.indexOf('/detail') > -1) {
-      this.loadData('/detail', val)
+      this.loadData('/detail', val,isNav)
     } else {
-      this.loadData('/', val)
+      this.loadData('/', val,isNav)
     }
   }
 
-  loadData = (url, val) => {
-    fetch(urls[url](val)).then(resp => {
+  loadData = (url, val, isNav) => {
+    fetch(urls[url](val), isNav).then(resp => {
       resp.json().then(results => {
-        this.createElements(results, url)
+        this.createElements(results, url, val)
         this.loading = false
       })
     })
   }
 
-  createElements = (results, url) => {
+  createElements = (results, url, val) => {
     this._section.innerHTML = ''
     this._section.classList.remove('loading')
     if (url === '/detail') {
+      this.addBackHome()
       const detailView = document.createElement('detail-view')
       detailView.detail = results
       this._section.appendChild(detailView)
     } else {
+      if (val) {
+        this.addBackHome()
+      }
       results.forEach(result => {
         const listItem = document.createElement('list-item')
         listItem.dataItem = result
         this._section.appendChild(listItem)
       })
     }
+  }
+
+  addBackHome = () => {
+    const back = document.createElement('div')
+    back.innerHTML = `
+    <a href="/" class="back">
+      <div class="icon"></div>
+      <div class="name">Home</div>
+    </a>
+    `
+    this._section.appendChild(back)
   }
 }
 

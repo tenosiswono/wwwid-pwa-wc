@@ -1,5 +1,5 @@
-import renderList from '../lib/renderList'
 import templateHtml from './list-item.html'
+import './categories-view'
 
 let template = document.createElement('template');
 template.innerHTML = templateHtml
@@ -17,6 +17,7 @@ class ListItem extends HTMLElement {
     this._author = this.shadowRoot.getElementById('author');
     this._pubDate = this.shadowRoot.getElementById('pub-date');
     this._description = this.shadowRoot.getElementById('description');
+    this._categories = this.shadowRoot.getElementById('categories');
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(entries => {
         let visiblity = false;
@@ -51,6 +52,9 @@ class ListItem extends HTMLElement {
     if (!('IntersectionObserver' in window)) {
       this._thumbnail.style.backgroundImage = `url('${props.thumbnail}')`;
     }
+    const categoriesView = document.createElement('categories-view')
+    categoriesView.categories = props.categories
+    this._categories.appendChild(categoriesView)
   }
 
   viewImage = (visiblity) => {
@@ -60,7 +64,6 @@ class ListItem extends HTMLElement {
       this._thumbnail.style.backgroundImage = '';
     }
   }
-
 }
 
 window.customElements.define('list-item', ListItem);

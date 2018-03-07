@@ -1,6 +1,5 @@
-import renderList from '../lib/renderList'
-import toTitleCase from '../lib/toTitleCase'
 import templateHtml from './detail-view.html'
+import './categories-view'
 
 let template = document.createElement('template');
 template.innerHTML = templateHtml
@@ -37,11 +36,9 @@ class DetailView extends HTMLElement {
     this._author.innerText = props.author;
     this._pubDate.innerText = (new Date(props.pubDate)).toLocaleDateString();
     this._content.innerHTML = props.content;
-    this._categories.innerHTML = renderList(props.categories, this.generateContent)
-  }
-
-  generateContent  = (value) => {
-    return `<li><a href="/cat/${value}" >${toTitleCase(value)}</a></li>`
+    const categoriesView = document.createElement('categories-view')
+    categoriesView.categories = props.categories
+    this._categories.appendChild(categoriesView)
   }
 }
 
