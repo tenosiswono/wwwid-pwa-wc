@@ -52,3 +52,4 @@ Lighthouse First Interactive (beta): 2,210 ms
 
 Lighthouse PWA Score: 91/100 (webpagetest pwa score seems to be broken the https redirect [#2363](https://github.com/GoogleChrome/lighthouse/issues/2363))
 
+~
