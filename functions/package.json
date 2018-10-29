@@ -15,7 +15,7 @@
     "firebase-admin": "~5.8.1",
     "firebase-functions": "^0.8.1",
     "lru-cache": "^4.1.1",
-    "slug": "^0.9.1"
+    "slug": "^0.9.2"
   },
   "devDependencies": {
     "eslint": "^4.12.0",
